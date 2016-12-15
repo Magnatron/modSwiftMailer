@@ -1,5 +1,5 @@
 # modSwiftMailer
-Shamelessly nicked from Mark Ernst (@ReSpawn) because he's too busy to put it on GitHub... 
+Shamelessly nicked from Mark Ernst (@ReSpawN) because he's too busy to put it on GitHub... 
 Sorry Mark! We need a more convenient way than a `vehicle` to get to the source.
 
 --------------------
