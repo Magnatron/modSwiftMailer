@@ -1,0 +1,75 @@
+Changelog for modSwiftMailer
+
+Though I recognize that this portion does not belong in the changelog, it is easy
+for you, the user, to see what the future plans for modSwiftMailer are.
+
+modSwiftMailer todo's (in order or appearance)
+====================================
+@todo	Inline attachments
+@todo	Extend debug functionality towards the mod log function
+@todo	More complete readme documentation
+@todo	Make auto-configurable (with one command)
+@todo	Make auto-launchable (with one command)
+@todo	Native date headers
+@todo	E-mail validation addon: MX Record check
+@todo	Rebuild a native MODX/Swift Mailer decorator to work with the modParser class
+
+modSwiftMailer 0.3.1-pl (comitted 39th of July, 2011, in order of appearance)
+====================================
+- Removed a development line
+- Promoted to Public release
+
+modSwiftMailer 0.3.0-rc1 (comitted 26th of July, 2011, in order of appearance)
+====================================
+- Added uninstall instructions in the readme.txt
+- Minor bugfixes
+- Minor documentation corrections
+- Added debug functionality ($_debug, debug, getDebug and getLog)
+- Added Swift Mailer plugin support
+- Added Decorator plugin
+- Added Throttler plugin
+- Added native Logger plugin
+- Added AntiFlood plugin
+- Removed deprecated lines of code
+- Added protected config array
+- Improved the constructor
+- Added automatic update of config via getService
+- Added _validate function with e-mail validation (later to be extended with MX records) to every e-mail related function
+- Fixed issue with setHTML that translated into a Swift Mailer getHeader error
+- Corrected, improved and added functionality from modPHPMailer crossover
+- Improved/Fixed ::MAIL_FROM and ::MAIL_FROM_NAME to nativly work with address
+- Completed PHPMailer to SwiftMailer functionality migration
+
+modSwiftMailer 0.2.1-rc1 (comitted 18th of July, 2011, in order of appearance)
+====================================
+# Unofficial release, not changed in the core or readme
+- Minor bugfixes
+- Minor documentation fixes
+
+modSwiftMailer 0.2.0-rc1 (comitted 18th of July, 2011, in order of appearance)
+====================================
+- Improved SMTP mail engine
+- Added mail() protocol transport
+- Added sendmail protocol transport (default /usr/sbin/sendmail -bs, see modMail::MAIL_ENGINE_PATH)
+- Completed [@todo] "Implement Linux Sendmail transporter"
+- Improved address function
+- Completed [@todo] "Create PHP native mailing transport (mail())"
+- Added no-reply, bounce and receipt to address function (shorthand aliasses)
+- Improved sender in address function
+- Rebuild set function, now only supported for backwards compatibility
+- Changed function message to a alias for function body
+- Added function priority (default to normal (2))
+- Numerous documentation typo's and corrections
+- Removed [@todo] "Make this readme pretty"
+- Rearranged some @todo's in order of importance
+- Improved class' function comments
+- Added toggleHTML and setPlain function
+- Added resetHeaders function
+- Repurposed address:to, *:cc and *:bcc to insert into a collection (inserted into the mailer when send is called)
+- Added function mail as an alias
+- Improved error reporting on send function
+- Repositioned functions to mimmic the order of processing
+
+modSwiftMailer 0.1.0-beta1 (comitted 16th of July, 2011)
+====================================
+- Initial release
