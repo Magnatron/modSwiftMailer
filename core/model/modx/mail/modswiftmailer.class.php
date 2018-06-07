@@ -218,7 +218,7 @@ class modSwiftMailer extends modMail {
 				// @deprecated	18th of July, 2011 (2011-07-18)		Not supported by Swift Mailer 4.0.1
 				// @see	header
 				// Make sure the format is something similar to en-us, en or nl-nl, nl
-				$this->header('Accept-Language', $this->attributes[$key]);
+				$this->xheader('Accept-Language', $this->attributes[$key]);
 				break;
 			case self::MAIL_PRIORITY:
 				return $this->priority($this->attributes[$key]);
@@ -851,7 +851,7 @@ class modSwiftMailer extends modMail {
 	 * 
 	 * @return	object	message object
 	 */
-	public function header($header, $value, $parameters = array(), $override = true) {
+	public function xheader($header, $value, $parameters = array(), $override = true) {
 		$header = str_replace(' ', '-', $header);
 		$reserved = array('engine', 'package');
 		
@@ -871,6 +871,27 @@ class modSwiftMailer extends modMail {
 		
 		return true;
 	}
+	
+	
+	/**
+	 * Adds a header to the mailer
+	 *
+	 * @access public
+	 * @param string $header The HTTP header to send.
+	 * @return boolean True if the header is valid and is set.
+	 */
+	public function header($header) {
+		$set= false;
+		$parsed= explode(':', $header, 2);
+		if ($parsed && count($parsed) == 2) {
+			$this->_headers[$parsed[0]]= array(
+				'value' => $parsed[1],
+				'parameters' => array()
+			);
+			$set= true;
+		}
+		return $set;
+	}
 
     /**
 	 * send
@@ -886,7 +907,7 @@ class modSwiftMailer extends modMail {
 	 * 
 	 * @return	array		Status array; 'success' is always available, other per status (true:sent, false:failures)
 	 */
-    public function send($attributes = array()) {
+    public function send(array $attributes = array()) {
 		// Create a new transport (moved from _getMailer() due to overriding SMTP settings per transport)
 		$this->mailer = Swift_Mailer::newInstance($this->_transport);
 		
@@ -1053,7 +1074,7 @@ class modSwiftMailer extends modMail {
 	 * 
 	 * @return	object	message object
 	 */
-    public function reset($attributes = array()) {
+    public function reset(array $attributes = array()) {
 		$this->_to = array();
 		$this->_cc = array();
 		$this->_bcc = array();
