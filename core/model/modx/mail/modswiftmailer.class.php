@@ -794,19 +794,19 @@ class modSwiftMailer extends modMail {
     }
 	
 	/**
-	 * prority
+	 * priority
 	 * 
 	 * Sets the mail's priority. This is not supported by webapps like Google's Gmail.
 	 * Nowadays, it is supported spotty at best
 	 * 
-	 * @name	prority
+	 * @name	priority
 	 * @access	public
 	 * 
 	 * @param	mixed	$priority	Priority of the e-mail
 	 * 
 	 * @return	void
 	 */
-	public function priority($prority = 3) {
+	public function priority($priority = 3) {
 		switch($priority) {
 			case 'highest':
 			case 1:
@@ -886,7 +886,7 @@ class modSwiftMailer extends modMail {
 	 * 
 	 * @return	array		Status array; 'success' is always available, other per status (true:sent, false:failures)
 	 */
-    public function send() {
+    public function send($attributes = array()) {
 		// Create a new transport (moved from _getMailer() due to overriding SMTP settings per transport)
 		$this->mailer = Swift_Mailer::newInstance($this->_transport);
 		
@@ -933,7 +933,13 @@ class modSwiftMailer extends modMail {
 			
 			return $this->modx->error->failure('modSwiftMailer is missing a valid message and/or mailer object');
 		}
-		
+	
+	    if (is_array($attributes)) {
+		    foreach ($attributes as $attrKey => $attrVal) {
+			    $this->set($attrKey, $attrVal);
+		    }
+	    }
+	    
         $failures = array();
 		
 		if (empty($this->_to) && empty($this->_cc) && empty($this->_bcc)) {
@@ -1015,7 +1021,7 @@ class modSwiftMailer extends modMail {
 		
 		if (!empty($failures)) {
 			return array(
-				'success' => (($send == count($failures)) ? false : true),
+				'success' => (($sent == count($failures)) ? false : true),
 				'message' => $sent.' mails sent, '.count($failures).' failed dilveries',
 				'sent' => $sent,
 				'failures' => $failures
@@ -1047,7 +1053,7 @@ class modSwiftMailer extends modMail {
 	 * 
 	 * @return	object	message object
 	 */
-    public function reset($headers = true) {
+    public function reset($attributes = array()) {
 		$this->_to = array();
 		$this->_cc = array();
 		$this->_bcc = array();
@@ -1057,7 +1063,8 @@ class modSwiftMailer extends modMail {
 		$this->message->setBcc(array());
 		$this->message->setSubject('');
 		
-		if ($headers == true) {
+		// backwards compat:
+		if ($attributes == array() || $attributes === true) {
 			$this->resetHeaders();
 		}
 		
