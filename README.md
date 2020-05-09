@@ -2,6 +2,8 @@
 Shamelessly nicked from Mark Ernst (@ReSpawN) because he's too busy to put it on GitHub... 
 Sorry Mark! We need a more convenient way than a `vehicle` to get to the source.
 
+ARCHIVED! Do not use this source. (Left here only for reference)
+
 --------------------
 MODX Revolution Service: modSwiftMailer
 --------------------
